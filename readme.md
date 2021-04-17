@@ -1,10 +1,10 @@
-# Project Name
+# Budgeter
 
-- **Author:** dfadfadfadfsfa
+- **Author:** Carson Fuhs
 - **Link to Live Site:** fdfadadfadfsdfadfadf
 
 
-## Project Summary
+## A simple way to budget 
 
 
 
