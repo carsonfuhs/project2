@@ -8,7 +8,81 @@
     <%- include("partials/header") %>
     <main>
       <!-- *********DISPLAY OUR GOALS********* -->
+
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-light">
+                Log Out
+              </a>
+            </div>
+          </div>
+        </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a href="/budget/income/new" class="button is-success">
+                  <strong>Add Income</strong>
+                </a>
+                <a href="/budget/expense/new" class="button is-danger">
+                  <strong>Add Expense</strong>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
       <h1 class="title">My Budget</h1>
+
+      <br>
+      <br>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Income or Expense</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (i of incomes) { %>
+          <tr>
+            <td>Income</td>
+            <td> <%= i.incomeDescription %> </td>
+            <td> <%= i.incomeAmount %> </td>
+            <td><a button href="/budget/income/<%= i._id %>/edit" class="button is-warning is-light">Edit</button></td>
+            <td><button class="button is-danger is-light">Delete</button></td>
+            <td><%= i._id %></td>
+          </tr>
+          <% } %>
+          <% for (expense of expenses) { %>
+            <tr>
+              <td>Expense</td>
+              <td> <%= expense.expenseDescription %> </td>
+              <td> <%= expense.expenseAmount %> </td>
+              <td><button class="button is-warning is-light">Edit</button></td>
+            <td><button class="button is-danger is-light">Delete</button></td>
+            </tr>
+          <% } %>
+          <!-- <tr>
+            <td>Income</td>
+            <td>Salary from Job</td>
+            <td>4000</td>
+          </tr>
+          <tr>
+            <td>Expense</td>
+            <td>Rent</td>
+            <td>1000</td>
+          </tr> -->
+        </tbody>
+      </table>
 
     </main>
     <!-- THE HEAD TAG PARTIAL -->

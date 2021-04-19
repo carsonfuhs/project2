@@ -8,13 +8,16 @@
         <!-- THE HEADER TAG PARTIAL -->
         <%- include("../partials/header") %>
         <main>
-            <h1>User Login</h1>
-
+            <div class="authInput">
+            <h1 class="title">User Login</h1>
             <form action="/auth/login" method="post">
-                <input type="text" placeholder="username" name="username" />
-                <input type="password" placeholder="password" name="password" />
-                <input type="submit" value="login" />
+                <input class="input" type="text" placeholder="username" name="username" />
+                <input class="input" type="password" placeholder="password" name="password" /> 
+                <input class="button" type="submit" value="login" />
             </form>
+            </div>
+
+            <!-- <input class="input" type="text" placeholder="Text input"> -->
 
             <!-- <% if (passwordDoesntMatchError = true) { %>
                 <p>Password doesn't match.</p>

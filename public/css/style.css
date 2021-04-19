@@ -1,3 +1,48 @@
-h1 {
+.card {
+    max-width: 400px;
+    margin: auto;
+}
+
+.table {
+    min-width: 80%;
+    margin: auto;
+}
+
+.authInput {
+    max-width: 400px;
     text-align: center;
+    margin: auto;
+    vertical-align: middle;
+    padding: 2%;
+}
+
+.card {
+    text-align: center;
+}
+
+/* h1.title {
+    margin: 100px;
+    vertical-align: middle;
+} */
+
+.field {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.control {
+    margin: 10px;
+}
+
+.input {
+    margin: 5px;
+}
+
+tr {
+    text-align: center;
+}
+
+td {
+    vertical-align: bottom;
 }

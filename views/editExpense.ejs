@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("partials/header") %>
+    <main>
+        <form action="/budget/expense/new" method="post">
+        <div class="field">
+            <label class="label">Expense Amount</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Amount" name="expenseAmount" value=''/>
+              <input class="input" type="text" placeholder="Description" name="expenseDescription"/>
+              <button class="button is-primary">Edit Expense</button>
+            </div>
+          </div>
+        </form>
+    </main>
+    <!-- THE HEAD TAG PARTIAL -->
+    <%- include("partials/footer") %>
+  </body>
+</html>

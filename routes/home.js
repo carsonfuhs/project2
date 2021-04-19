@@ -3,6 +3,7 @@
 ////////////////////////////////
 const router = require("express").Router()
 const bcrypt = require("bcryptjs")
+const { isValidObjectId } = require("mongoose")
 const User = require('../models/user')
 
 ///////////////////////////////
@@ -128,24 +129,89 @@ router.get('/budget', isAuthorized, async (req, res) => {
     
     //pass req.user to our template
     res.render('budget', {
-        goals: req.user.goals
+        incomes: req.user.incomes,
+        expenses: req.user.expenses,
     })
 
 })
 
-router.post('/budget', isAuthorized, async (req, res) => {
+//creating a new income
+router.get('/budget/income/new', (req, res) => {
+    res.render('newIncome.ejs', {
+        income: req.user.incomes
+    })
+})
+
+router.post('/budget/income/new', isAuthorized, async (req, res) => {
 
     //fetch up to date user
     const user = await User.findOne({username: req.user.username})
 
     //push the goal into the user
-    user.goals.push(req.body)
+    user.incomes.push(req.body)
     await user.save()
 
     //redirect back to goals
     res.redirect('/budget')
     
 })
+
+//creating a new expense
+router.get('/budget/expense/new', (req, res) => {
+    res.render('newExpense.ejs', {
+        expense: req.user.expenses
+    })
+})
+
+router.post('/budget/expense/new', isAuthorized, async (req, res) => {
+
+    //fetch up to date user
+    const user = await User.findOne({username: req.user.username})
+
+    //push the goal into the user
+    user.expenses.push(req.body)
+    await user.save()
+
+    //redirect back to goals
+    res.redirect('/budget')
+    
+})
+
+router.get('/budget/income/:id/edit', (req,res) => {
+
+    User.findById(req.params.id, (error, incomeID) => {
+
+        const index1 = req.user.incomes.findIndex(x => x.id === req.params.id)
+
+        res.render('editIncome.ejs', {
+            id: req.params.id,
+            amount: req.user.incomes[index1].incomeAmount,
+            description: req.user.incomes[index1].incomeDescription,
+            //expenses: req.user.expenses,
+        })
+    })
+})
+
+router.put('/budget/income/:id', (req, res) => {
+
+    //const index1 = req.user.incomes.findIndex(x => x.id === req.params.id)
+
+    User.findOneAndUpdate(req.session.userId, req.body, {new: true}, (error, updatedModel) => {
+        res.redirect('/budget')
+    })
+
+    
+
+})
+
+// router.get('/budget/expense/:id/edit', (req,res) => {
+//     User.findById(req.params.id, (error, incomeID) => {
+//         res.render('editexpense.ejs', {
+//             income: incomeID 
+//         })
+//     })
+// })
+
 
 ///////////////////////////////
 // Export Router

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("partials/header") %>
+    <main>
+
+        <form action="/budget/income/<%= id %>?_method=PUT" method="post">
+        <div class="field">
+            <label class="label">Income Amount</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Amount" name="incomeAmount" value="<%= amount %>" />
+              <input class="input" type="text" placeholder="Description" name="incomeDescription" value="<%= description %>"/>
+              <button class="button is-primary">Submit Income</button>
+            </div>
+          </div>
+        </form>
+    </main>
+    <!-- THE HEAD TAG PARTIAL -->
+    <%- include("partials/footer") %>
+  </body>
+</html>
