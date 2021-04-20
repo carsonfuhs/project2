@@ -23,6 +23,7 @@ const cors = require("cors");
 // GET PORT FROM ENV OR DEFAULT PORT
 const PORT = process.env.PORT || "2021";
 const SECRET = process.env.SECRET || "secret"
+const MONGO = process.env.MONGODB_URL //added to deploy to heroku?
 const HomeRouter = require("./routes/home.js");
 
 
