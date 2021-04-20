@@ -8,14 +8,36 @@
         <!-- THE HEADER TAG PARTIAL -->
         <%- include("../partials/header") %>
         <main>
-            <div class="authInput">
+
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-start">
+                  <div class="navbar-item">
+                    <div class="buttons">
+                      <a href='/' class="button is-light">
+                        Home
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                      <div class="buttons">
+                        <a href='/auth/login' class="button is-light">
+                          Login
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              </nav>
+
+            <div class="authInput box">
             <h1 class="title">User Signup</h1>
 
             
             <form action="/auth/signup" method="post">
                 <input class="input" type="text" placeholder="username" name="username" />
                 <input class="input" type="password" placeholder="password" name="password" />
-                <input class="button" type="submit" value="signup" />
+                <input class="button is-primary" type="submit" value="signup" />
             </form>
         </div>
 

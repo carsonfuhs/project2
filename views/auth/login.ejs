@@ -8,20 +8,37 @@
         <!-- THE HEADER TAG PARTIAL -->
         <%- include("../partials/header") %>
         <main>
-            <div class="authInput">
+
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-start">
+                  <div class="navbar-item">
+                    <div class="buttons">
+                      <a href='/' class="button is-light">
+                        Home
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                      <div class="buttons">
+                        <a href='/auth/signup' class="button is-light">
+                          Signup
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              </nav>
+
+
+            <div class="authInput box">
             <h1 class="title">User Login</h1>
             <form action="/auth/login" method="post">
                 <input class="input" type="text" placeholder="username" name="username" />
                 <input class="input" type="password" placeholder="password" name="password" /> 
-                <input class="button" type="submit" value="login" />
+                <input class="button is-primary" type="submit" value="Login" />
             </form>
             </div>
-
-            <!-- <input class="input" type="text" placeholder="Text input"> -->
-
-            <!-- <% if (passwordDoesntMatchError = true) { %>
-                <p>Password doesn't match.</p>
-            <% } %> -->
 
         </main>
         <!-- THE HEAD TAG PARTIAL -->

@@ -46,3 +46,41 @@ tr {
 td {
     vertical-align: bottom;
 }
+
+.message {
+    text-align: center;
+}
+
+.message-header {
+    text-align: center;
+}
+
+.box {
+
+    min-width: 500px;
+    min-height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+ 
+}
+
+/* form {
+
+    min-width: 500px;
+    min-height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+ 
+} */
+
+/* .title {
+    font-size: 50px;
+} */

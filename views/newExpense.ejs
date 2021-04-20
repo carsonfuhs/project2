@@ -8,14 +8,19 @@
     <%- include("partials/header") %>
     <main>
         
-        <!-- working form -->
-        <!-- <form action="/budget/new" method="post">
-            <input type="text" placeholder="amount" name="incomeAmount" />
-            <input type="text" placeholder="description" name="incomeDescription" />
-            <input type="submit" value="add income" />
-        </form> -->
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a href='/budget' class="button is-link">
+                Back to Budget
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-        <form action="/budget/expense/new" method="post">
+        <form action="/budget/expense/new" method="post" class="box">
         <div class="field">
             <label class="label">Expense Amount</label>
             <div class="control">
@@ -26,38 +31,6 @@
           </div>
         </form>
 
-        <!-- <form action="/budget/new" method="POST" >
-        <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                Add Income or Expense
-              </p>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <div class="control">
-                    <label class="radio">
-                      <input type="radio" name="answer">
-                      Income
-                    </label>
-                    <label class="radio">
-                      <input type="radio" name="answer">
-                      Expense
-                    </label>
-                  </div>
-                <br>
-
-                <input class="input" type="text" placeholder="Amount" name="Amount">
-                <br><br>
-                <input class="input" type="text" placeholder="Description" name="Description">
-
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a href="/budget" class="card-footer-item">Submit</a>
-            </footer>
-          </div>
-        </form> -->
     </main>
     <!-- THE HEAD TAG PARTIAL -->
     <%- include("partials/footer") %>

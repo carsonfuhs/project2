@@ -7,12 +7,25 @@
     <!-- THE HEADER TAG PARTIAL -->
     <%- include("partials/header") %>
     <main>
-        <form action="/budget/expense/new" method="post">
+
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a href='/budget' class="button is-link">
+                Back to Budget
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+        <form action="/budget/expense/<%= id %>?_method=PUT" method="post" class="box">
         <div class="field">
             <label class="label">Expense Amount</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Amount" name="expenseAmount" value=''/>
-              <input class="input" type="text" placeholder="Description" name="expenseDescription"/>
+              <input class="input" type="text" placeholder="Amount" name="expenseAmount" value='<%= amount %>'/>
+              <input class="input" type="text" placeholder="Description" name="expenseDescription" value="<%= description %>" />
               <button class="button is-primary">Edit Expense</button>
             </div>
           </div>

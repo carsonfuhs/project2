@@ -10,7 +10,7 @@ const User = require('../models/user')
 // Custom Middleware Functions
 ////////////////////////////////
 
-//check if user is logge in, add user to request
+//check if user is logged in, add user to request
 const addUserToRequest = async(req, res, next) => {
 
     //check if the user is logged in
@@ -102,8 +102,6 @@ router.post('/auth/login', async (req, res) => {
 
             } else {
                 //res.json({error: "Password does not match"})
-
-                //passwordDoesntMatchError = true
                 res.render('auth/login')
             }
         } else {
@@ -136,48 +134,49 @@ router.get('/budget', isAuthorized, async (req, res) => {
 })
 
 //creating a new income
-router.get('/budget/income/new', (req, res) => {
+router.get('/budget/income/new', isAuthorized, (req, res) => {
     res.render('newIncome.ejs', {
         income: req.user.incomes
     })
 })
-
+//posting a new income
 router.post('/budget/income/new', isAuthorized, async (req, res) => {
 
     //fetch up to date user
     const user = await User.findOne({username: req.user.username})
 
-    //push the goal into the user
+    //push the expense into the user
     user.incomes.push(req.body)
     await user.save()
 
-    //redirect back to goals
+    //redirect back to budget
     res.redirect('/budget')
     
 })
 
 //creating a new expense
-router.get('/budget/expense/new', (req, res) => {
+router.get('/budget/expense/new', isAuthorized, (req, res) => {
     res.render('newExpense.ejs', {
         expense: req.user.expenses
     })
 })
-
+//posting a new expense
 router.post('/budget/expense/new', isAuthorized, async (req, res) => {
 
     //fetch up to date user
     const user = await User.findOne({username: req.user.username})
 
-    //push the goal into the user
+    //push the expense into the user
     user.expenses.push(req.body)
     await user.save()
 
-    //redirect back to goals
+    //redirect back to budget
     res.redirect('/budget')
     
 })
 
-router.get('/budget/income/:id/edit', (req,res) => {
+//editing an income entry
+router.get('/budget/income/:id/edit', isAuthorized, (req,res) => {
 
     User.findById(req.params.id, (error, incomeID) => {
 
@@ -191,26 +190,94 @@ router.get('/budget/income/:id/edit', (req,res) => {
         })
     })
 })
+//posting the edited income entry
+router.put('/budget/income/:id', isAuthorized, async (req, res) => {
 
-router.put('/budget/income/:id', (req, res) => {
+    //fetch up to date user
+    const user = await User.findOne({username: req.user.username})
 
-    //const index1 = req.user.incomes.findIndex(x => x.id === req.params.id)
+    //finds the array index in mongo
+    const index1 = req.user.incomes.findIndex(x => x.id === req.params.id)
 
-    User.findOneAndUpdate(req.session.userId, req.body, {new: true}, (error, updatedModel) => {
-        res.redirect('/budget')
-    })
+    //deletes the current array and pushes the new data into its spot
+    user.incomes.splice(index1, 1)
+    user.incomes.splice((index1), 0, req.body)
+    await user.save()
 
-    
+    //redirect back to budget
+    res.redirect('/budget')
 
 })
 
-// router.get('/budget/expense/:id/edit', (req,res) => {
-//     User.findById(req.params.id, (error, incomeID) => {
-//         res.render('editexpense.ejs', {
-//             income: incomeID 
-//         })
-//     })
-// })
+//editing an expense entry
+router.get('/budget/expense/:id/edit', isAuthorized, (req,res) => {
+
+    User.findById(req.params.id, (error, incomeID) => {
+
+        const index1 = req.user.expenses.findIndex(x => x.id === req.params.id)
+
+        res.render('editExpense.ejs', {
+            id: req.params.id,
+            amount: req.user.expenses[index1].expenseAmount,
+            description: req.user.expenses[index1].expenseDescription,
+            //expenses: req.user.expenses,
+        })
+    })
+})
+//posting the edited expense entry
+router.put('/budget/expense/:id', isAuthorized, async (req, res) => {
+
+    //fetch up to date user
+    const user = await User.findOne({username: req.user.username})
+
+    //finds the array index in mongo
+    const index1 = req.user.expenses.findIndex(x => x.id === req.params.id)
+
+    //deletes the current array and pushes the new data into its spot
+    user.expenses.splice(index1, 1)
+    user.expenses.splice((index1), 0, req.body)
+    await user.save()
+
+    //redirect back to budget
+    res.redirect('/budget')
+
+})
+
+//deleting an income entry
+router.delete('/budget/income/:id', isAuthorized, async (req, res) => {
+
+    //fetch up to date user
+    const user = await User.findOne({username: req.user.username})
+
+    //finds the array index in mongo
+    const index1 = req.user.incomes.findIndex(x => x.id === req.params.id)
+
+    //deletes the current array
+    user.incomes.splice(index1, 1)
+    await user.save()
+
+    //redirect back to budget
+    res.redirect('/budget')
+
+})
+
+//deleting an expense entry
+router.delete('/budget/expense/:id', isAuthorized, async (req, res) => {
+
+    //fetch up to date user
+    const user = await User.findOne({username: req.user.username})
+
+    //finds the array index in mongo
+    const index1 = req.user.expenses.findIndex(x => x.id === req.params.id)
+
+    //deletes the current array
+    user.expenses.splice(index1, 1)
+    await user.save()
+
+    //redirect back to budget
+    res.redirect('/budget')
+
+})
 
 
 ///////////////////////////////

@@ -8,7 +8,20 @@
     <%- include("partials/header") %>
     <main>
 
-        <form action="/budget/income/<%= id %>?_method=PUT" method="post">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a href='/budget' class="button is-link">
+                Back to Budget
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+        <form action="/budget/income/<%= id %>?_method=PUT" method="post" class="box">
         <div class="field">
             <label class="label">Income Amount</label>
             <div class="control">

@@ -7,13 +7,13 @@
     <!-- THE HEADER TAG PARTIAL -->
     <%- include("partials/header") %>
     <main>
-      <!-- *********DISPLAY OUR GOALS********* -->
+      <!-- navbar -->
 
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-start">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-light">
+              <a href='/auth/logout' class="button is-black">
                 Log Out
               </a>
             </div>
@@ -34,14 +34,56 @@
         </div>
       </nav>
 
-
-      <h1 class="title">My Budget</h1>
-
       <br>
       <br>
 
+      <br>
 
-      <table class="table">
+      <!-- t will be total for the table - ti for income total, te for expense total -->
+      <% let te = 0; %>
+      <% let ti = 0; %>
+      <% let t = 0; %>
+
+      <% for (i of incomes) { 
+        ti += i.incomeAmount
+      } %>
+
+      <% for (e of expenses) { 
+        te += e.expenseAmount
+      } %>
+      
+        <!-- columns -->
+
+          <div class="columns is-centered">
+            <div class="column is-5">
+              <h1 class="title is-vcentered" style="font-size: 45px; text-align: center;">My Budget</h1>
+            </div>
+            <div class="column is-2">
+              <article class="message is-success">
+                <div class="message-header">
+                  <p style="text-align: center;">Total Incomes:</p>
+                </div>
+                <div class="message-body" style="font-size: 20px;">
+                  <strong>$<%= ti %></strong>
+                </div>
+              </article>
+            </div>
+            <div class="column is-2">
+              <article class="message is-danger">
+                <div class="message-header">
+                  <p>Total Expenses</p>
+                </div>
+                <div class="message-body" style="font-size: 20px;">
+                  <strong>$<%= te %></strong>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <br>
+
+
+      <table class="table is-striped">
         <thead>
           <tr>
             <th>Income or Expense</th>
@@ -54,34 +96,32 @@
         <tbody>
           <% for (i of incomes) { %>
           <tr>
-            <td>Income</td>
-            <td> <%= i.incomeDescription %> </td>
-            <td> <%= i.incomeAmount %> </td>
-            <td><a button href="/budget/income/<%= i._id %>/edit" class="button is-warning is-light">Edit</button></td>
-            <td><button class="button is-danger is-light">Delete</button></td>
-            <td><%= i._id %></td>
+            <td class="is-vcentered">Income</td>
+            <td class="is-vcentered"> <%= i.incomeDescription %> </td>
+            <td class="is-vcentered"> <%= i.incomeAmount %> <% t += i.incomeAmount %> </td>
+            <td class="is-vcentered"><a button href="/budget/income/<%= i._id %>/edit" class="button is-warning is-light">Edit</button></td>
+              <td class="is-vcentered"><form action="/budget/income/<%= i._id %>?_method=DELETE" method="POST"><button class="button is-danger is-light">Delete</button></form></td>
           </tr>
           <% } %>
-          <% for (expense of expenses) { %>
-            <tr>
-              <td>Expense</td>
-              <td> <%= expense.expenseDescription %> </td>
-              <td> <%= expense.expenseAmount %> </td>
-              <td><button class="button is-warning is-light">Edit</button></td>
-            <td><button class="button is-danger is-light">Delete</button></td>
-            </tr>
-          <% } %>
-          <!-- <tr>
-            <td>Income</td>
-            <td>Salary from Job</td>
-            <td>4000</td>
-          </tr>
+          <% for (e of expenses) { %>
           <tr>
-            <td>Expense</td>
-            <td>Rent</td>
-            <td>1000</td>
-          </tr> -->
+            <td class="is-vcentered">Expense</td>
+            <td class="is-vcentered"> <%= e.expenseDescription %> </td>
+            <td class="is-vcentered"> (<%= e.expenseAmount %>) <% t -= e.expenseAmount %></td>
+            <td class="is-vcentered"><a button href="/budget/expense/<%= e._id %>/edit" class="button is-warning is-light">Edit</button></td>
+              <td class="is-vcentered"><form action="/budget/expense/<%= e._id %>?_method=DELETE" method="POST"><button class="button is-danger is-light">Delete</button></form></td>
+          </tr>
+          <% } %>
         </tbody>
+        <tfoot>
+          <tr class="is-selected">
+            <th></th>
+            <th>Balance:</th>
+            <th>$<%= t %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </tfoot>
       </table>
 
     </main>
