@@ -1,7 +1,7 @@
 //import schema and model
 const {Schema, model} = require('../db/connection')
 
-//image schema
+//income schema
 const IncomeSchema = new Schema({
     incomeDescription: String,
     incomeAmount: Number,
